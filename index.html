@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:linear-gradient(135deg,#ffc0cb,#ff4f6d);
+    height:100vh;
+    overflow:hidden;
+    color:white;
+}
+
+/* Slides */
+.slide{
+    display:none;
+    height:100vh;
+    width:100vw;
+    padding:25px;
+    text-align:center;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    animation:fade 0.8s;
+}
+.slide.active{
+    display:flex;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:scale(0.95);}
+    to{opacity:1; transform:scale(1);}
+}
+
+h1{
+    font-family:'Pacifico', cursive;
+    font-size:2.4rem;
+}
+
+p{
+    margin-top:15px;
+    font-size:1.1rem;
+    max-width:600px;
+}
+
+img{
+    width:200px;
+    margin:20px 0;
+    animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+    50%{transform:translateY(-10px);}
+}
+
+button{
+    margin-top:20px;
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    font-size:1rem;
+    cursor:pointer;
+    background:#fff;
+    color:#ff4f6d;
+    font-weight:bold;
+}
+button:hover{
+    transform:scale(1.1);
+}
+
+/* Hearts */
+.heart{
+    position:absolute;
+    bottom:0;
+    font-size:22px;
+    animation:heart 5s linear infinite;
+}
+@keyframes heart{
+    to{transform:translateY(-100vh); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+    <source src="until-i-found-you.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Slide 1 -->
+<div class="slide active">
+    <h1>🎆 Happy New Year 2026 🎆</h1>
+    <img src="cat.png">
+    <p>Wishing you warmth, smiles and something special this year 🐱❄️❤️</p>
+    <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+    <h1>💖 From My Heart</h1>
+    <p>
+        You’ve been one of the **best moments** of my year ✨<br><br>
+        Last year we didn’t even know we existed…  
+        and now we’re stepping into a **new year together** 🫶🎉
+    </p>
+    <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+    <h1>🐱 One Question</h1>
+    <img src="cat1.png">
+    <p>Will you start this New Year with me? 💞🎆</p>
+    <button onclick="yesSlide()">Yes 💕</button>
+    <button onclick="noSlide()">No 🙈</button>
+</div>
+
+<!-- YES -->
+<div class="slide">
+    <h1>🥹❤️ Yayyy!</h1>
+    <img src="cat.png">
+    <p>
+        I’m really happy to start this New Year with you 💖  
+        Let’s make it warm, cute and full of memories ❄️🐾
+    </p>
+    <button onclick="nextSlide()">Next ➡️</button>
+</div>
+
+<!-- EXTRA -->
+<div class="slide">
+    <h1>🎀 New Year Promise</h1>
+    <p>
+        More laughs 😄<br>
+        More moments 💕<br>
+        More us 🫶<br>
+        All year long ❄️
+    </p>
+</div>
+
+<!-- NO -->
+<div class="slide">
+    <h1>😼 Too Late!</h1>
+    <img src="cat2.png">
+    <p>
+        Too late 😏<br>
+        You’re already stuck with me this year ❤️🐱
+    </p>
+    <button onclick="goBack()">Try Again 🔄</button>
+</div>
+
+<script>
+let slides=document.querySelectorAll(".slide");
+let index=0;
+let music=document.getElementById("bgMusic");
+
+function show(i){
+    slides.forEach(s=>s.classList.remove("active"));
+    slides[i].classList.add("active");
+}
+
+function nextSlide(){
+    if(index===0){
+        music.volume=0.35;
+        music.play(); // starts music after first click (safe for browsers)
+    }
+    if(index<slides.length-1){
+        index++;
+        show(index);
+    }
+}
+
+function yesSlide(){
+    index=3;
+    show(index);
+}
+
+function noSlide(){
+    index=5;
+    show(index);
+}
+
+function goBack(){
+    index=2;
+    show(index);
+}
+
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},700);
+</script>
+
+</body>
+</html>
